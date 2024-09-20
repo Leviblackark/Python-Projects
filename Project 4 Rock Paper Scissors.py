@@ -55,14 +55,16 @@ else:
     print(game_images[number_index])
 
     # Compair Results to decide a winner
-    if number_index > user_choice:
+
+    if user_choice == 0 and number_index == 2:
         print("You Win!")
-    elif user_choice == 1 and number_index == 2:
-        print("You Lose!")
+    # One instance when the user is greater
     elif user_choice == 2 and number_index == 0:
         print("You Lose!")
-    elif user_choice == 0 and number_index == 1:
-        print("You Lose!")
+    # Not all instance where computers choice is greater
+    elif number_index > user_choice:
+        print("You Lose")
+    # Not all instance where the user is greater
     elif user_choice > number_index:
         print("You Win!")
     elif user_choice == number_index:
