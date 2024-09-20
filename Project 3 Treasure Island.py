@@ -42,13 +42,19 @@ if answer_1 == "left" or answer_1 == "right":
                              '\nType: First Second Third or Neither\n').lower()
             if answer_3 == "first":
                 print("We are all neither and all three at the same time, "
-                      "humans can evolve and they change shape over time.")
+                      "humans can evolve and they change shape over time."
+                      "\n️✖️️️✖️✖️️✖️✖️️️✖️️️️✖️✖️️✖️️️️️✖️✖️✖️️✖️GAMEOVER️✖️️️✖️✖️️✖️️✖️✖️️️✖️✖️️✖️️✖️️️✖️✖️"
+                      "️✖️️️✖️️️✖️️️")
             elif answer_3 == "Second":
                 print("Strength comes from weakness, rocks never began strong "
-                      "but form over countless life times")
+                      "but form over countless life times"
+                      "\n ️✖️️️✖️✖️️✖️✖️️️✖️️️️✖️✖️️✖️️️️️✖️✖️✖️️✖️GAMEOVER️✖️️️✖️✖️️✖️️✖️✖️️️✖️✖️️✖️️✖️️️✖️✖️"
+                      "️✖️️️✖️️️✖️️️")
             elif answer_3 == "third":
                 print("To have peace, you must have known pain. Harmony is a "
-                      "price paved in sorrow and hardship")
+                      "price paved in sorrow and hardship"
+                      "\n️✖️️️✖️✖️️✖️✖️️️✖️️️️✖️✖️️✖️️️️️✖️✖️✖️️✖️GAMEOVER️✖️️️✖️✖️️✖️️✖️✖️️️✖️✖️️✖️️✖️️️✖️✖️"
+                      "️✖️️️✖️️️✖️️️")
             elif answer_3 == "neither":
                 print('You Win, we are all three'
                       '\nHumans are not created equal'
@@ -56,19 +62,19 @@ if answer_1 == "left" or answer_1 == "right":
                       '\nAnd to know peace you must know pain')
             else:
                 print("✖️✖️✖️ERROR INCORRECT ENTRY✖️✖️✖️️️")
-                print("️✖️✖️️✖️✖️️✖️✖️️✖️GAME️✖️️️✖️✖️️✖️️✖️✖️️✖️")
+                print("️✖️️✖️✖️️✖️✖️️✖️GAMEOVER️✖️️️✖️✖️️✖️️✖️️✖️")
                 print("✖️✖️✖️ERROR INCORRECT ENTRY✖️✖️✖️️")
         elif answer_2 == "burn":
             print('We can not predict ones path but to journey alone is to be the last'
-                  '\n✖️️✖️️️✖️✖️️✖️✖️️️✖️️️️✖️✖️️✖️️️️️✖️✖️✖️️✖️GAME️✖️️️✖️✖️️✖️️✖️✖️️️✖️✖️️✖️️✖️️️✖️✖️️✖️️️✖️️️✖️️️✖️')
+                  '\n️✖️️️✖️✖️️✖️✖️️️✖️️️️✖️✖️️✖️️️️️✖️✖️✖️️✖️GAMEOVER️✖️️️✖️✖️️✖️️✖️✖️️️✖️✖️️✖️️✖️️️✖️✖️️✖️️️✖️️️✖️️️')
         else:
             print("✖️✖️✖️ERROR INCORRECT ENTRY✖️✖️✖️️️")
-            print("️✖️✖️️✖️✖️️✖️✖️️✖️GAME️✖️️️✖️✖️️✖️️✖️✖️️✖️")
+            print("️✖️️✖️✖️️✖️✖️️✖️GAMEOVER️✖️️️✖️✖️️✖️️✖️✖️️")
             print("✖️✖️✖️ERROR INCORRECT ENTRY✖️✖️✖️️")
     else:
         print('The plants are Poppies and envy is the root of all demise'
-              '\n️✖️✖️️✖️✖️️️✖️️️️✖️✖️️✖️️️️️✖️✖️✖️️✖️GAME️✖️️️✖️✖️️✖️️✖️✖️️️✖️✖️️✖️️✖️️️✖️✖️️✖️️️✖️️')
+              '\n️✖️️✖️✖️️️✖️️️️✖️✖️️✖️️️️️✖️✖️✖️️✖️GAMEOVER✖️️️✖️✖️️✖️️✖️✖️️️✖️✖️️✖️️✖️️️✖️✖️️✖️️️')
 else:
     print("✖️✖️✖️ERROR INCORRECT ENTRY✖️✖️✖️️️")
-    print("️✖️✖️️✖️✖️️✖️✖️️✖️GAME️✖️️️✖️✖️️✖️️✖️✖️️✖️")
+    print("️✖️️✖️✖️️✖️✖️️✖️GAMEOVER️✖️️️✖️✖️️✖️️✖️️✖️")
     print("✖️✖️✖️ERROR INCORRECT ENTRY✖️✖️✖️️")
