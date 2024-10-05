@@ -27,4 +27,4 @@ second_name = input("Type your match: ")
 
 
 print(f"{first_name} and {second_name} you have a Grand Match of : ")
-calculate_love_score(name1 = first_name, name2 = second_name)
+calculate_love_score(name1=first_name, name2=second_name)

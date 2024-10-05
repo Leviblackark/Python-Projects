@@ -1,6 +1,6 @@
 import random
-from Project_7_hangman_art import stages, logo
-from Project_7_hangman_words import word_list
+from project7art import stages, logo
+from project7words import word_list
 
 # Set lives to 6 this will decrease everytime the guess is wrong
 lives = 6
