@@ -1,4 +1,4 @@
-from project9art import logo
+from art import logo
 
 print(logo)
 bids_made = {}

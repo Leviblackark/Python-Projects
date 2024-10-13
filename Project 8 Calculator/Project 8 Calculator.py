@@ -1,4 +1,4 @@
-from project10art import logo
+from art import logo
 
 
 # TODO: Write out the other 4 functions - subtract, multiply and divide.
