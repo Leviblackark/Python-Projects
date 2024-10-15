@@ -3,10 +3,10 @@ import random
 from art import logo
 
 print(logo)
-
 # Simplified version ACE = 11,  10 has a chance of winning four times, the desk stays the same, computer is the dealer
 
 # TODO: Deal both user and computer a starting hand of 2 random card values.
+# store the values of what cards are held
 user_count = []
 dealer_count = []
 
@@ -20,6 +20,18 @@ def hand():
     return card[index]
 
 
+def score(count):
+    """Calculate total"""
+    return sum(count)
+
+
+def black_jack(listed):
+    if 11 in listed and 10 in listed:
+        return 1
+    else:
+        return 0
+
+
 play_game = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ").lower()
 
 start = True
@@ -29,20 +41,45 @@ while play_game != "y" and play_game != "n":
     print("Sorry invalid entry")
     play_game = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ").lower()
 
+
 if play_game == "y":
 
     #  Create loop that hands out the first hand
     for first_hand in range(1, 3):
+        # user
         user_count.append(hand())
+        # dealer
         dealer_count.append(hand())
 
-    print(user_count)
-    print(dealer_count)
+    # Tests
+    # print(user_count)
+    # print(dealer_count)
 
-# TODO: Detect when computer or user has a blackjack. (Ace + 10 value card).
+    # User card
+    current_score = score(count=user_count)
+    converted_display = ", ".join(map(str, user_count))
 
-# TODO: If computer gets blackjack, then the user loses (even if the user also has a blackjack).
-#  If the user gets a blackjack, then they win (unless the computer also has a blackjack).
+    # dealer, display only 1 card
+    dealers_tally = score(count=dealer_count)
+    unconcealed_card = dealer_count[1]
+
+    # Show hand
+    print(f"Your cards: {converted_display}, current score: {current_score}")
+    # TODO: Reveal computer's first card to the user.
+    print(f"Computer's first card: {unconcealed_card}, ✖️")
+
+    # TODO: Detect when computer or user has a blackjack. (Ace + 10 value card)
+    if black_jack(listed=user_count) == 1:
+        if black_jack(listed=dealer_count) == 0:
+            print(f"BLACKJACK YOU WIN 😁 {current_score}")
+        # Check if the Dealer also has a back jack
+        elif black_jack(listed=dealer_count) == 1:
+            print("YOU LOSE 🤕, DEALER BLACKJACK OVERRIDE")
+            dealer_reveal = ", ".join(map(str, dealer_count))
+            print(f"Dealers cards: {dealer_reveal} Score: {dealers_tally}")
+
+    # TODO: If computer gets blackjack, then the user loses (even if the user also has a blackjack).
+    #  If the user gets a blackjack, then they win (unless the computer also has a blackjack).
 
 # TODO: Calculate the user's and computer's scores based on their card values.
 # TODO: If an ace is drawn, count it as 11. But if the total goes over 21, count the ace as 1 instead.
