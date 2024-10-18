@@ -28,13 +28,16 @@ def black_jack(listed):
 
 
 def adjust_for_ace(count):
-    """Adjust the value of ace from 11 to 1 if the total score exceeds 21"""
+    """Adjust the value of ace from 11 to 1 ONLY if the total score exceeds 21"""
     # Both over 21 and 11 inside list would have to be true
-    while score(count) > 21 and 11 in count:
+    total_score = score(count)
+    while total_score > 21 and 11 in count:
         # location
         ace_index = count.index(11)
         # Change value
         count[ace_index] = 1
+        total_score = score(count)  # Recalculate score after adjusting
+
     # Return the changed list and then save it back inside itself
     return count
 
@@ -42,8 +45,6 @@ def adjust_for_ace(count):
 start = True
 
 while start:
-    print(logo)
-
     # TODO: Deal both user and computer a starting hand of 2 random card values.
     # store the values of what cards are held
     user_count = []
@@ -57,7 +58,8 @@ while start:
         play_game = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ").lower()
 
     if play_game == "y":
-
+        print("\n" * 20)
+        print(logo)
         #  deal two cards
         for first_hand in range(1, 3):
             # user
@@ -106,40 +108,79 @@ while start:
         if current_score > 21:
             converted_display = ", ".join(map(str, user_count))
             print(f"Bust! Your score: {current_score}, Your cards: {converted_display}")
+
+            # Show dealer's final score to the user after the bust
             dealers_tally = score(count=dealer_count)
             dealers_display = ", ".join(map(str, user_count))
             print(f"Dealers score: {dealers_tally}, dealers reveal {dealers_tally}")
 
+            # prompt the user to restart the game or exit
+            play_game = input("You lost. Do you want to play again? Type 'y' or 'n': ").lower()
+
+            # Exit if the useer does not want to play again
+            if play_game == "n":
+                print("Goodbye!")
+                start = False  # End the outer loop and the game
+            break  # break the inner loop to move on to the next game "y"
+
         # TODO: Ask the user if they want to get another card.
-        another_card = input("Type 'y' to get another card, type 'n' to pass: ").lower
+        add_card = True
 
-        # Check for the correct input and reprompt if needed
-        # while another_card != "y" and another_card != "n":
-        #     print("Sorry invalid entry")
-        #     another_card = input("Type 'y' to get another card, type 'n' to pass: ").lower
+        while add_card:
+            another_card = input("Type 'y' to get another card, type 'n' to pass: ").lower()
 
-        while another_card == "y":
-            # add a new card to the user, hand() = random number, append into targeted list
-            user_count.append(hand())
-            user_count = adjust_for_ace(user_count)
+            while another_card != "y" and another_card != "n":
+                print("Sorry invalid entry")
+                another_card = input("Type 'y' to get another card, type 'n' to pass: ").lower()
+            print("\n")
+            if another_card == "y":
 
-            # display update
-            current_score = score(user_count)
-            converted_display = ", ".join(map(str, user_count))
+                # add a new card to the user, hand() = random number, append into targeted list
+                user_count.append(hand())
+                user_count = adjust_for_ace(user_count)
 
-            print(f"Your cards: {converted_display}, current score: {current_score}")
-            print(f"Dealer's first card: {unconcealed_card}, ✖️")
+                # display update
+                current_score = score(user_count)
+                converted_display = ", ".join(map(str, user_count))
 
-            if current_score > 21:
-                print(f"Busted! Your score: {current_score}. You lose.")
-                continue  # Restarts the game loop for a new game
+                print(f"Your cards: {converted_display}, current score: {current_score}")
+                print(f"Dealer's first card: {unconcealed_card}, ✖️")
 
-            another_card = input("Type 'y' to get another card, type 'n' to pass: ").lower
+                # if the user is bust
+                if current_score > 21:
+                    print(f"Busted! Your score: {current_score}. You lose.")
+                    add_card = False  # Ends the loop so it stops asking for cards
+                    break  # Exits the current round to as if the user wants to play again
 
+            else:
+                # TODO: Once the user is done and no longer wants to draw any more cards, let the computer play.
+                # End my turn and run the final calculation
+                add_card = False
+                # The computer should keep drawing cards unless their score goes over 16.
 
-# TODO: Once the user is done and no longer wants to draw any more cards, let the computer play.
-#  The computer should keep drawing cards unless their score goes over 16.
+                while score(dealer_count) < 16:
+                    dealer_count.append(hand())
+                    # Replace 11 with 1 if score is over 21 and 11 is present. Save back into list
+                    dealer_count = adjust_for_ace(dealer_count)
 
-# TODO: Compare user and computer scores and see if it's a win, loss, or draw.
-# TODO: Print out the player's and computer's final hand and their scores at the end of the game.
-# TODO: After the game ends, ask the user if they'd like to play again. Clear the console for a fresh start.
+                # new score
+                dealers_tally = score(dealer_count)
+                dealers_hand = ", ".join(map(str, dealer_count))
+
+                # display both scores without calculation
+                print(f"Dealers final hand: {dealers_hand}, final score: {dealers_tally}")
+                print(f"Your cards: {converted_display}, current score: {current_score}")
+
+                # TODO: Compare user and computer scores and see if it's a win, loss, or draw.
+                if dealers_tally > 21:
+                    print(f"Dealers bust You Win with a score of {current_score}!")
+                elif current_score > dealers_tally:
+                    print("You win your score was higher! 😎")
+                elif dealers_tally > current_score:
+                    print(f"You Lose, dealers score: {dealers_tally} Your score: {current_score}")
+                else:
+                    # Draw equal two each other
+                    print(f"You draw same score 🪿, Your Score: {current_score} Dealer: {dealers_tally}")
+    else:
+        start = False  # Typed "n" falling in to "else:" Ending the program
+        print("Goodbye!")
