@@ -111,8 +111,8 @@ while start:
 
             # Show dealer's final score to the user after the bust
             dealers_tally = score(count=dealer_count)
-            dealers_display = ", ".join(map(str, user_count))
-            print(f"Dealers score: {dealers_tally}, dealers reveal {dealers_tally}")
+            dealers_display = ", ".join(map(str, dealer_count))
+            print(f"Dealers score: {dealers_display}, dealers reveal {dealers_tally}")
 
             # prompt the user to restart the game or exit
             play_game = input("You lost. Do you want to play again? Type 'y' or 'n': ").lower()
