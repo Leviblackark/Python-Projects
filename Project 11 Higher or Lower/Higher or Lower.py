@@ -48,10 +48,11 @@ while game:
     # Display date
     # TODO: The score appears at the top, the second selections and then it gets restarted with this at the top
     if score > 0:
+        print("\n" * 2)
         print(f"You're Right! Current score: {score}")
     print(f"Compare A: {option_1["name"]}, {option_1["description"]}, {option_1["country"]}")
     print(art.vs)
-    print(f"Compare B: {option_2["name"]}, {option_2["description"]}, {option_2["country"]}")
+    print(f"Against B: {option_2["name"]}, {option_2["description"]}, {option_2["country"]}")
 
     # TODO: create a prompt to ask who has more follow
     #  try-except block with a while loop, if state to exit
