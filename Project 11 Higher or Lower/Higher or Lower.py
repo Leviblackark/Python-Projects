@@ -32,9 +32,11 @@ score = 0
 game = True
 while game:
     index = []
-    for i in range(2):
+    while len(index) < 2:
         list_index = random.randint(0, 49)  # 50 items 0-49
-        index.append(list_index)
+        # if the random number is not the same then add the list
+        if list_index not in index:
+            index.append(list_index)
 
     # TODO: Access the dictionary at the two numbers in the list
     #  Display there date
