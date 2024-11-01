@@ -50,7 +50,7 @@ def play_game():
     user_cards = []
     computer_card = []
     #  Because Computer_score is inside the first while, we create a test with the second while loop
-    #  and it's undefined. fix this but assigning a value that's not 0 because its used in return for another test
+    #  and it's undefined. fix this but assigning a value that's not 0 because it's used in return for another test
     computer_score = -1
     user_score = -1
     is_game_over = False

@@ -16,7 +16,7 @@ def random_number():
 
 number = random_number()
 # Display number to text code
-print(f"The correct answer is: {number}")
+# print(f"The correct answer is: {number}")
 
 # TODO: Start the game by asking “easy” or “hard”
 #  Easy = 10 and hard = 5 let the user know  how many guesses.  Ask to make a guess
