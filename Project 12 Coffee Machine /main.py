@@ -1,3 +1,4 @@
+# Coffee machine
 MENU = {
     "espresso": {
         "ingredients": {
@@ -29,7 +30,20 @@ resources = {
     "milk": 200,
     "coffee": 100,
 }
-# Coffee machine
+
+
+def check_resources(value, pot):
+    """it formats resources and current account of machine """
+    # value = Value of the dictionary
+    water = "Water: " + str(value["water"]) + "ml"
+    milk = "Milk: " + str(value["milk"]) + "ml"
+    coffee = "Coffee: " + str(value["coffee"]) + "g"
+
+    # Money
+    account = "Money: $" + str(pot)
+
+    print(f"{water}\n{milk}\n{coffee}\n{account}")
+
 
 # TODO 1: Prompt user by asking “What would you like? (espresso/latte/cappuccino):”
 #  Check the user’s input to decide what to do next
@@ -37,15 +51,22 @@ resources = {
 # The prompt should show every time action has completed, e.g. once the drink is
 #  dispensed. The prompt should show again to serve the next customer.
 
-# TODO 2: Report displays what's currently in resources and then reprompt (While loop)
+money = 0
+coffee_machine = True
 
-# Display resources
-# Money that the machines been collecting
+while coffee_machine:
+    # Prompt
+    response = input("What would you like? (espresso/latte/cappuccino): ").strip().lower()
 
-# TODO 3: Turn off the Coffee Machine by entering “off” to the prompt. (Exit Loop)
+    # TODO 2: Report displays what's currently in resources and then reprompt (While loop)
+    #  Turn off the Coffee Machine by entering “off” to the prompt
 
-# For maintainers of the coffee machine, they can use “off” as the secret word to turn off
-#  the machine. Your code should end execution when this happens.
+    if response == "report":
+        # Display resources
+        check_resources(resources, money)
+
+    elif response == "off":
+        coffee_machine = False
 
 # TODO 4: Check resources Sufficient? When the user chooses a drink, the program should check if there are enough
 #  resources to make that drink
@@ -72,10 +93,7 @@ resources = {
 # If the user has inserted too much money, the machine should offer change.
 # "Here is $2.45 dollars in change.” The change should be rounded to 2 decimal places.
 
-
 # TODO 7: If successful deducted from resources
 
 # Here's your(name of drink) enjoy!
 # prompt
-
-
