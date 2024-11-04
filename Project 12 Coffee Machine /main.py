@@ -27,8 +27,8 @@ MENU = {
 
 resources = {
     # 300 200 100
-    "water": 100,
-    "milk": 100,
+    "water": 300,
+    "milk": 200,
     "coffee": 100,
 }
 
@@ -61,7 +61,59 @@ def compare_resources(ingredients, machine_hold):
         convert = " and ".join(out_of)
         print(f"Sorry there is not enough {convert}.")
     else:
-        print(f"Sorry there is not enough {out_of[0]}.")
+        if len(out_of) == 1:  # Make sure there somthing in the list to display
+            print(f"Sorry there is not enough {out_of[0]}.")
+        else:
+            # if it returns 0 then you can use that to the computer to move to the next step
+            return 0
+
+
+def insert_coin():
+    """Prompts for coins in American money and returns the value"""
+    # TODO 5: Process Coins. If there are sufficient resources to make the drink selected, then the program should
+    #  prompt the user to insert coins.
+
+    # Remember that quarters = $0.25, dimes = $0.10, nickles = $0.05, pennies = $0.01
+
+    # Assign American coins there value
+    quarters = 0.25
+    dimes = 0.10
+    nickles = 0.05
+    pennies = 0.01
+
+    print("Please insert coins.")
+    # prompt for how many coins entered
+    amount_of_quarters = float(input("How many quarters?: "))
+    amount_of_dimes = float(input("How many dimes?: "))
+    amount_of_nickles = float(input("How many nickles?: "))
+    amount_of_pennies = float(input("How many pennies?: "))
+
+    # Calculate the monetary value of the coins inserted. E.g. 1 quarter, 2 dimes, 1 nickel, 2
+    #  pennies = 0.25 + 0.1 x 2 + 0.05 + 0.01 x 2 = $0.52
+
+    # Calculation
+    account = ((quarters * amount_of_quarters)
+               + (dimes * amount_of_dimes)
+               + (nickles * amount_of_nickles)
+               + (pennies * amount_of_pennies)
+               )
+    return account
+
+
+def update_resources(machine_hold, ingredients):
+    """Checks to see ingredients and then checks if its in resources and decrease resources  """
+    # Don't edit the global variable
+    update_re = {
+        "water": machine_hold["water"],
+        "milk": machine_hold["milk"],
+        "coffee": machine_hold["coffee"],
+    }
+
+    for key_word in ingredients:
+        if key_word in update_re:
+            new_amount = update_re[key_word] - ingredients[key_word]
+            update_re[key_word] = new_amount
+    return update_re
 
 
 # TODO 1: Prompt user by asking “What would you like? (espresso/latte/cappuccino):”
@@ -92,34 +144,77 @@ while coffee_machine:
     # Compare what's in the resources to ingredients needed, if less, then tell the user "Sorry not enough" and reprompt
     #  Access for entered order. “Sorry there is not enough water.” and for each one
 
-    elif  response == "latte":
-        # MENU["latte"]["ingredients"]
-        compare_resources(ingredients=MENU["latte"]["ingredients"], machine_hold=resources)
+    elif response == "latte":
+        # Check if enough resources
+        latte = compare_resources(ingredients=MENU["latte"]["ingredients"], machine_hold=resources)
+        # Confirmation that theirs enough
+        if latte == 0:
+            # TODO 6: Check Transaction Successful?
+            #  Check that the user has inserted enough money to purchase the drink they selected.
+
+            coins_inserted = round(insert_coin(), 2)
+            # print(coins_inserted)
+            cost = MENU["latte"]["cost"]
+
+            # Checking if there is enough money. if not enough and then reprompt
+            if coins_inserted < cost:
+                print("Sorry that's not enough money. Money refunded.")
+
+            # if the user has inserted enough money, then the cost of the drink gets added to the
+            #  machine as the profit and this will be reflected the next time “report” is triggered
+            else:  # Coins_inserted is greater than or equal to the latte
+                if coins_inserted > cost:
+                    change = coins_inserted - cost
+                    print(f"Here is ${change} dollars in change")
+
+                money += cost
+                # TODO 7: If successful deducted from resources
+                # Create a function returning an output,  save it back in to itself to update the list
+                resources = update_resources(machine_hold=resources, ingredients=MENU["latte"]["ingredients"])
+                print(f"Here is your latte. Enjoy!")
+
     elif response == "espresso":
-        compare_resources(ingredients=MENU["espresso"]["ingredients"], machine_hold=resources)
+        # Check if enough resources
+        espresso = compare_resources(ingredients=MENU["espresso"]["ingredients"], machine_hold=resources)
+
+        if espresso == 0:
+            # TODO 6: Check Transaction Successful?
+            coins_inserted = round(insert_coin(), 2)
+            cost = MENU["espresso"]["cost"]
+
+            # Checking if there is enough money. if not enough and then reprompt
+            if coins_inserted < cost:
+                print("Sorry that's not enough money. Money refunded.")
+
+            else:  # Coins_inserted is greater than or equal to the latte
+                if coins_inserted > cost:
+                    change = coins_inserted - cost
+                    print(f"Here is ${change} dollars in change")
+
+                money += cost
+                # TODO 7: If successful deducted from resources
+                resources = update_resources(machine_hold=resources, ingredients=MENU["espresso"]["ingredients"])
+                print(f"Here is your espresso. Enjoy!")
+
     elif response == "cappuccino":
-        compare_resources(ingredients=MENU["cappuccino"]["ingredients"], machine_hold=resources)
+        # Check if enough resources
+        cappuccino = compare_resources(ingredients=MENU["cappuccino"]["ingredients"], machine_hold=resources)
 
-    # TODO 5: Process Coins. If there are sufficient resources to make the drink selected, then the program should
-    #  prompt the user to insert coins.
+        if cappuccino == 0:
+            # TODO 6: Check Transaction Successful?
+            coins_inserted = round(insert_coin(), 2)
+            cost = MENU["cappuccino"]["cost"]
 
-    # Remember that quarters = $0.25, dimes = $0.10, nickles = $0.05, pennies = $0.01
+            # Checking if there is enough money. if not enough and then reprompt
+            if coins_inserted < cost:
+                print("Sorry that's not enough money. Money refunded.")
 
-    # Calculate the monetary value of the coins inserted. E.g. 1 quarter, 2 dimes, 1 nickel, 2
-    #  pennies = 0.25 + 0.1 x 2 + 0.05 + 0.01 x 2 = $0.52
+            else:  # Coins_inserted is greater than or equal to the latte
+                if coins_inserted > cost:
+                    change = coins_inserted - cost
+                    print(f"Here is ${change} dollars in change")
 
-# TODO 6: Check Transaction Successful?
-#  Check that the user has inserted enough money to purchase the drink they selected.
-
-# “Sorry that's not enough money. Money refunded.”  if not enough and then reprompt
-
-# if the user has inserted enough money, then the cost of the drink gets added to the
-#  machine as the profit and this will be reflected the next time “report” is triggered
-
-# If the user has inserted too much money, the machine should offer change.
-# "Here is $2.45 dollars in change.” The change should be rounded to 2 decimal places.
-
-# TODO 7: If successful deducted from resources
-
-# Here's your(name of drink) enjoy!
-# prompt
+                money += cost
+                # TODO 7: If successful deducted from resources
+                resources = update_resources(machine_hold=resources, ingredients=MENU["cappuccino"]["ingredients"])
+                print(f"Here is your cappuccino. Enjoy!")
