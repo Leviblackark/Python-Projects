@@ -8,6 +8,7 @@ class QuizBrain:
     def __init__(self, q_list):
         # keeps track of question we're on
         self.question_number = 0
+        self.score = 0
         #  Pass in the question bank
         self.question_list = q_list
 
@@ -24,6 +25,30 @@ class QuizBrain:
     def next_question(self):
         # question_index is assessing where the object is stored. and becomes the object
         question_index = self.question_list[self.question_number]
-        # instead of starting the count from 0 it's adjusted before display and after the index is found
+        # increase the count to 1 after 0 as been run so it displays 1 when the input displays
+        # this also allows the index for the next question to move up by 1 so when its next called it access the next
+        #  question and not the current
         self.question_number += 1
-        input(f"Q.{self.question_number}: {question_index.text} (True/False): ")
+        user_answer = input(f"Q.{self.question_number}: {question_index.text} (True/False): ")
+        # passing the user_answer in to check_answer to see if it's correct
+        self.check_answer(user_answer, question_index.answer)
+
+    def check_answer(self, user_answer, correct_answer):
+        #  Make sure both the entry and the right answer are comparable with the .lower()
+        if user_answer.lower() == correct_answer.lower():
+            print("You got it right!")
+            self.score += 1
+        else:
+            # if false so the user got it wrong
+            print("That was wrong")
+        # Outside the block so it displays regardless
+        print(f"The correct answer was: {correct_answer}")
+        # score and current question the user is on
+        print(f"Your current score is: {self.score}/{self.question_number}")
+        print("\n")
+
+    def final_score(self):
+        """prints the last score data"""
+        print(f"Your final score was: {self.score}/{self.question_number}")
+
+

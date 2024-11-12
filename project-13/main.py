@@ -27,6 +27,11 @@ quiz = QuizBrain(question_bank)
 while quiz.still_has_question():
     quiz.next_question()
 
+# Outside the loop once the quiz is completed
+print("You've completed the Quiz")
+# quiz.score or quiz.question_number also works
+quiz.final_score()
+
 
 
 
