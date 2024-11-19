@@ -1,3 +1,4 @@
+# Using the turtle module to practice OOP
 from turtle import Turtle, Screen
 from shapes import Shape
 
@@ -21,6 +22,5 @@ for _ in range(3):
 
 screen = Screen()
 # screen.listen()
-
 # screen.onkey(move_up, "w")
 screen.exitonclick()
